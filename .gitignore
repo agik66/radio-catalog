@@ -1,5 +1,10 @@
 __pycache__/
 *.pyc
-dist/
+# dist/ sú generované súbory, ALE catalog.json a artist_index.json sú
+# samotný produkt — appka si ich ťahá z CDN, takže musia byť v repe.
+dist/*
+!dist/catalog.json
+!dist/artist_index.json
+!dist/stats.json
 .venv/
 .DS_Store

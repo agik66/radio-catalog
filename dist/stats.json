@@ -1,0 +1,204 @@
+{
+ "input": 863,
+ "kept": 646,
+ "dropped_unsafe": 0,
+ "dropped_dead": 0,
+ "dropped_codec": 13,
+ "dropped_bitrate": 82,
+ "dropped_duplicate": 122,
+ "with_genre": 524,
+ "with_geo": 162,
+ "taxonomy_coverage_pct": 72.9,
+ "by_genre": {
+  "news": 40,
+  "talk": 25,
+  "dance": 54,
+  "pop": 180,
+  "rock": 298,
+  "classic-rock": 90,
+  "country": 15,
+  "oldies": 98,
+  "metal": 45,
+  "hard-rock": 37,
+  "alternative": 76,
+  "relax": 10,
+  "folk": 27,
+  "punk": 17,
+  "jazz": 26,
+  "classical": 20,
+  "comedy": 3,
+  "electronic": 43,
+  "hiphop": 16,
+  "reggae": 4,
+  "blues": 13,
+  "latin": 2,
+  "soul-funk": 24,
+  "culture": 4,
+  "religious": 6,
+  "kids": 7,
+  "sport": 2,
+  "schlager": 2
+ },
+ "top_unmapped_tags": [
+  [
+   "moi merino",
+   18
+  ],
+  [
+   "youth",
+   10
+  ],
+  [
+   "český rozhlas",
+   10
+  ],
+  [
+   "américa",
+   9
+  ],
+  [
+   "juvenil",
+   8
+  ],
+  [
+   "local music",
+   7
+  ],
+  [
+   "goldies",
+   7
+  ],
+  [
+   "tv",
+   7
+  ],
+  [
+   "love songs",
+   7
+  ],
+  [
+   "ciudad de méxico",
+   7
+  ],
+  [
+   "romantic",
+   6
+  ],
+  [
+   "london",
+   6
+  ],
+  [
+   "mediaset",
+   6
+  ],
+  [
+   "acir",
+   6
+  ],
+  [
+   "cdmx",
+   6
+  ],
+  [
+   "grupo acir",
+   6
+  ],
+  [
+   "iheart",
+   6
+  ],
+  [
+   "iheart radio",
+   6
+  ],
+  [
+   "mexico city",
+   6
+  ],
+  [
+   "valle de méxico",
+   6
+  ],
+  [
+   "regional radio",
+   5
+  ],
+  [
+   "england",
+   5
+  ],
+  [
+   "europe",
+   5
+  ],
+  [
+   "música en inglés",
+   5
+  ],
+  [
+   "top 100",
+   5
+  ],
+  [
+   "non-stop music",
+   5
+  ],
+  [
+   "música en español",
+   5
+  ],
+  [
+   "música del recuerdo",
+   5
+  ],
+  [
+   "phonk",
+   4
+  ],
+  [
+   "new wave",
+   4
+  ],
+  [
+   "experimental",
+   4
+  ],
+  [
+   "dab",
+   4
+  ],
+  [
+   "the best of 80's",
+   4
+  ],
+  [
+   "decades",
+   4
+  ],
+  [
+   "livestream",
+   4
+  ],
+  [
+   "balada en español",
+   4
+  ],
+  [
+   "baladas en español",
+   4
+  ],
+  [
+   "vrt",
+   4
+  ],
+  [
+   "russian",
+   4
+  ],
+  [
+   "música en español e inglés",
+   4
+  ]
+ ]
+}
