@@ -159,6 +159,24 @@ class RadioBrowser:
         })
         return [Station.from_api(r) for r in rows]
 
+    def countries(self, *, min_stations: int = 1) -> list[tuple[str, int]]:
+        """Every ISO country code Radio Browser has stations for, most first.
+
+        Returned as (code, stationcount) so the caller can decide how deep to
+        go per country. Codes are filtered to two uppercase letters: the
+        endpoint also returns junk entries (empty strings, stray names) that a
+        station search would just answer with nothing.
+        """
+        rows = self._get("countrycodes")
+        out = []
+        for r in rows:
+            code = (r.get("name") or "").strip().upper()
+            count = int(r.get("stationcount") or 0)
+            if len(code) == 2 and code.isalpha() and count >= min_stations:
+                out.append((code, count))
+        out.sort(key=lambda p: -p[1])
+        return out
+
     def stations_by_tag(self, tag: str, *, limit: int = 5_000) -> list[Station]:
         rows = self._get("stations/search", {
             "tag": tag, "limit": limit,

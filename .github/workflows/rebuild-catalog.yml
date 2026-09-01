@@ -23,11 +23,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      # Deep in the big listening markets, then one head from every other
+      # country on earth — see the two-pass comment in build.py. The old
+      # twelve-country list made a catalog that was half Czech and Slovak.
       - name: Rebuild the catalog
         run: |
-          python build.py --countries SK,CZ,DE,GB,US,PL,AT,HU,FR,IT,ES,NL \
-            --tags rock,jazz,metal,electronic,classical \
-            --limit 800 --out dist --watchable
+          python build.py \
+            --countries US,GB,DE,FR,IT,ES,NL,SE,NO,DK,FI,PL,CZ,SK,AT,CH,HU,RO,GR,PT,IE,BE,CA,AU,NZ,JP,KR,BR,AR,MX,ZA,IN,UA,TR,IL \
+            --tags rock,jazz,metal,electronic,classical,ambient,hiphop,soul,reggae,blues,funk,indie,punk,folk,latin \
+            --worldwide 25 \
+            --limit 300 --out dist --watchable
       - name: Commit
         run: |
           git config user.name  "blare-harvester"

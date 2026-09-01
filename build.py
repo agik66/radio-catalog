@@ -30,6 +30,10 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Builds the radio station catalog")
     ap.add_argument("--countries", default="SK,CZ",
                     help="comma-separated country codes (e.g. SK,CZ,DE)")
+    ap.add_argument("--worldwide", type=int, metavar="N", default=0,
+                    help="ALSO take the N most-clicked stations from every "
+                         "other country Radio Browser knows, on top of "
+                         "--countries and --tags")
     ap.add_argument("--tags", default="",
                     help="extra tags to fetch (e.g. rock,jazz)")
     ap.add_argument("--limit", type=int, default=2000, help="cap per country")
@@ -53,14 +57,51 @@ def main() -> int:
     rb = RadioBrowser()
     print(f"mirror: {rb.servers()[0]}")
 
-    raw = []
-    for cc in [c.strip().upper() for c in args.countries.split(",") if c.strip()]:
+    # TWO PASSES, DEEP AND WIDE, BECAUSE ONE CANNOT BE BOTH.
+    #
+    # `--countries` goes deep: several hundred stations each from the markets
+    # with the most listeners. That is where the stations people actually
+    # search for live, and it is what the artist index needs to be worth
+    # anything.
+    #
+    # `--worldwide N` then goes wide: the N most-clicked stations from every
+    # OTHER country the API knows. Without it the catalog stops at the
+    # thirty-odd countries in the deep list, and the globe on LIB has nothing
+    # over Africa, most of Asia and the Middle East — which is exactly the
+    # complaint that started this ("why do we only have Slovak streams").
+    #
+    # It has to be per-country. A single "most clicked worldwide" query comes
+    # back ~80% US and German, because clickcount is dominated by the big
+    # markets; only sampling each country separately gives the small ones a
+    # head at all.
+    #
+    # N is small on purpose. Measured: artist-search success is 66% at 230
+    # stations and 74% at 3000, and flat above that — the ceiling is how many
+    # stations publish now-playing metadata, not how many exist. Bundling all
+    # 48 000 would add megabytes and roughly one percentage point.
+    deep = [c.strip().upper() for c in args.countries.split(",") if c.strip()]
+
+    passes: list[tuple[str, int]] = [(cc, args.limit) for cc in deep]
+    if args.worldwide:
         try:
-            got = rb.stations_by_country(cc, limit=args.limit)
+            countries = rb.countries()
+        except RuntimeError as exc:
+            print(f"could not list countries: {exc}", file=sys.stderr)
+            return 1
+        wide = [code for code, _ in countries if code not in set(deep)]
+        passes += [(cc, args.worldwide) for cc in wide]
+        print(f"deep: {len(deep)} countries at {args.limit}; "
+              f"wide: {len(wide)} more at {args.worldwide}")
+
+    raw = []
+    for cc, cap in passes:
+        try:
+            got = rb.stations_by_country(cc, limit=cap)
         except RuntimeError as exc:
             print(f"  {cc}: ERROR {exc}", file=sys.stderr)
             continue
-        print(f"  {cc}: {len(got)}")
+        if got:
+            print(f"  {cc}: {len(got)}")
         raw += got
 
     for tag in [t.strip() for t in args.tags.split(",") if t.strip()]:
