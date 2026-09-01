@@ -22,7 +22,7 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass, field
 
-USER_AGENT = "Cliamp/1.0 (+https://github.com/cliamp) catalog-builder"
+USER_AGENT = "Blare/1.0 (+https://github.com/agik66/radio-catalog) catalog-builder"
 DISCOVERY_HOST = "all.api.radio-browser.info"
 FALLBACK_SERVERS = ("de2.api.radio-browser.info", "at1.api.radio-browser.info")
 

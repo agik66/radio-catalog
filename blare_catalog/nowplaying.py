@@ -20,7 +20,7 @@ from urllib.parse import urlsplit
 
 from .net import UnsafeURL, validate_url
 
-USER_AGENT = "Cliamp/1.0 catalog-builder"
+USER_AGENT = "Blare/1.0 catalog-builder"
 
 # Poradie podľa nameranej úspešnosti: status-json.xsl drvivo vedie.
 STATUS_PATHS = ("/status-json.xsl", "/stats?json=1", "/status.xsl", "/7.html")

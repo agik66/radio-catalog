@@ -20,10 +20,10 @@ import json
 import sys
 from pathlib import Path
 
-from cliamp_catalog import genres
-from cliamp_catalog.curate import Gate, apply_editorial, curate, to_triage_input
-from cliamp_catalog.radiobrowser import RadioBrowser
-from cliamp_catalog.watchable import annotate_watchable
+from blare_catalog import genres
+from blare_catalog.curate import Gate, apply_editorial, curate, to_triage_input
+from blare_catalog.radiobrowser import RadioBrowser
+from blare_catalog.watchable import annotate_watchable
 
 
 def main() -> int:
@@ -116,8 +116,8 @@ def main() -> int:
 
     print(f"\nzapísané do {out}/  (catalog.json, triage_input.json, stats.json)")
     print(f"ďalší krok: overenie na simulátore\n"
-          f"  cd ../CliampIOS && ./scripts/triage.sh "
-          f"../cliamp-catalog/{out}/triage_input.json /tmp/verified.json 8 20")
+          f"  cd ../Blare && ./scripts/triage.sh "
+          f"../radio-catalog/{out}/triage_input.json /tmp/verified.json 8 20")
     return 0
 
 

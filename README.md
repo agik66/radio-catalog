@@ -1,6 +1,6 @@
-# cliamp-catalog
+# radio-catalog
 
-Stavia katalóg rádiových staníc pre appku Cliamp. Obyčajný deterministický
+Stavia katalóg rádiových staníc pre aplikáciu Blare. Obyčajný deterministický
 Python skript — **žiadny agent**. Overiteľnosť je celý zmysel tohto komponentu.
 
 ## Použitie
@@ -15,8 +15,8 @@ Výstupy: `catalog.json` (pre appku), `triage_input.json` (pre sondu),
 Databáza vie klamať — `lastcheckok` má presnosť ~95 %. Skutočný test je
 prehratie cez reálny AVFoundation stack:
 
-    cd ../CliampIOS
-    ./scripts/triage.sh ../cliamp-catalog/dist/triage_input.json verified.json 8 20
+    cd ../Blare
+    ./scripts/triage.sh ../radio-catalog/dist/triage_input.json verified.json 8 20
 
 ## Vrstvy
 

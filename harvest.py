@@ -19,7 +19,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from cliamp_catalog.nowplaying import normalize_artist, probe
+from blare_catalog.nowplaying import normalize_artist, probe
 
 
 def collect(stations: list[dict], *, workers: int = 12,
