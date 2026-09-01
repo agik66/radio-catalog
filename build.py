@@ -23,6 +23,7 @@ from pathlib import Path
 from cliamp_catalog import genres
 from cliamp_catalog.curate import Gate, apply_editorial, curate, to_triage_input
 from cliamp_catalog.radiobrowser import RadioBrowser
+from cliamp_catalog.watchable import annotate_watchable
 
 
 def main() -> int:
@@ -38,6 +39,9 @@ def main() -> int:
                     help="ponechať aj stanice, ktoré RB označil ako nefunkčné")
     ap.add_argument("--curated", default="curated.json",
                     help="editorský zoznam, ktorý ide na vrch")
+    ap.add_argument("--watchable", action="store_true",
+                    help="zistiť, ktoré stanice sa dajú sledovať bez sťahovania zvuku")
+    ap.add_argument("--watch-workers", type=int, default=16)
     args = ap.parse_args()
 
     out = Path(args.out)
@@ -76,6 +80,12 @@ def main() -> int:
 
     print("\nkurácia:")
     print(stats.report())
+
+    if args.watchable:
+        print(f"\nzisťujem sledovateľnosť ({len(catalog)} staníc)…")
+        n_watch = annotate_watchable(catalog, workers=args.watch_workers)
+        print(f"  sledovateľných: {n_watch}/{len(catalog)} "
+              f"({n_watch / len(catalog) * 100:.0f}%)")
 
     tag_hist: dict[str, int] = {}
     for s in raw:

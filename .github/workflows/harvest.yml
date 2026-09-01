@@ -1,0 +1,47 @@
+name: harvest
+
+# Hodinový zber toho, čo stanice hrajú.
+# Verejné repo = neobmedzené minúty, takže celý "backend" je zadarmo.
+on:
+  schedule:
+    - cron: "17 * * * *"   # nie na celú hodinu — vtedy je GitHub najviac vyťažený
+  workflow_dispatch:        # ručné spustenie
+
+concurrency:
+  group: harvest
+  cancel-in-progress: false   # nikdy neprerušiť beh uprostred zápisu indexu
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Zber
+        run: python harvest.py --catalog dist/catalog.json --data data --out dist
+
+      - name: Commit indexu
+        run: |
+          git config user.name  "cliamp-harvester"
+          git config user.email "harvester@users.noreply.github.com"
+          git add data/plays.json dist/artist_index.json
+          if git diff --staged --quiet; then
+            echo "žiadna zmena"
+            exit 0
+          fi
+          git commit -m "harvest: $(date -u +%Y-%m-%dT%H:%MZ)"
+          # Iný beh mohol medzitým pushnúť — rebase namiesto zlyhania.
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && \
+            git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 5
+          done
+          exit 1

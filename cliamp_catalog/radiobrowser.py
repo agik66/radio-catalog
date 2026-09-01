@@ -12,6 +12,7 @@ Bez externých závislostí (žiadny `requests`) — beží to na holom Pythone.
 from __future__ import annotations
 
 import gzip
+import http.client
 import json
 import random
 import socket
@@ -141,7 +142,8 @@ class RadioBrowser:
                     if resp.headers.get("Content-Encoding") == "gzip":
                         raw = gzip.decompress(raw)
                     return json.loads(raw.decode("utf-8"))
-            except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, OSError) as exc:
+            except (urllib.error.URLError, http.client.HTTPException,
+                    TimeoutError, json.JSONDecodeError, OSError) as exc:
                 last_err = exc
                 continue  # skús ďalší mirror
 
