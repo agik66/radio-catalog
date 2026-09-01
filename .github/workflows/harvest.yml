@@ -1,15 +1,15 @@
 name: harvest
 
-# Hodinový zber toho, čo stanice hrajú.
-# Verejné repo = neobmedzené minúty, takže celý "backend" je zadarmo.
+# Hourly harvest of what the stations are playing.
+# A public repo means unlimited minutes, so the whole "backend" is free.
 on:
   schedule:
-    - cron: "17 * * * *"   # nie na celú hodinu — vtedy je GitHub najviac vyťažený
-  workflow_dispatch:        # ručné spustenie
+    - cron: "17 * * * *"   # off the hour — that is when GitHub is busiest
+  workflow_dispatch:        # manual run
 
 concurrency:
   group: harvest
-  cancel-in-progress: false   # nikdy neprerušiť beh uprostred zápisu indexu
+  cancel-in-progress: false   # never interrupt a run mid index write
 
 permissions:
   contents: write
@@ -25,20 +25,22 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Zber
+      - name: Harvest
         run: python harvest.py --catalog dist/catalog.json --data data --out dist
 
-      - name: Commit indexu
+      - name: Commit the index
         run: |
-          git config user.name  "cliamp-harvester"
+          git config user.name  "blare-harvester"
           git config user.email "harvester@users.noreply.github.com"
+          # simulcast.json is only produced when harvest runs with --simulcast,
+          # which CI does not. Adding a missing path would fail the job.
           git add data/plays.json dist/artist_index.json
           if git diff --staged --quiet; then
-            echo "žiadna zmena"
+            echo "no change"
             exit 0
           fi
           git commit -m "harvest: $(date -u +%Y-%m-%dT%H:%MZ)"
-          # Iný beh mohol medzitým pushnúť — rebase namiesto zlyhania.
+          # Another run may have pushed meanwhile — rebase instead of failing.
           for i in 1 2 3; do
             git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && \
             git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0

@@ -1,12 +1,13 @@
-"""Klient na Radio Browser — komunitnú databázu rádiových staníc.
+"""Client for Radio Browser — the community database of radio stations.
 
-Pravidlá, ktoré API očakáva a ktoré tu dodržiavame:
-  * server sa hľadá cez DNS (`all.api.radio-browser.info`), nie natvrdo —
-    jednotlivé mirrory miznú a striedajú sa
-  * povinný User-Agent identifikujúci appku a verziu
-  * prekliky sa hlásia na /json/url/{uuid}, inak kazíme ich štatistiky
+The rules the API expects, and that we keep to here:
+  * the server is found over DNS (`all.api.radio-browser.info`), never
+    hardcoded — individual mirrors disappear and rotate
+  * a mandatory User-Agent identifying the app and its version
+  * clickthroughs are reported to /json/url/{uuid}, otherwise we spoil their
+    statistics
 
-Bez externých závislostí (žiadny `requests`) — beží to na holom Pythone.
+No external dependencies (no `requests`) — this runs on bare Python.
 """
 
 from __future__ import annotations
@@ -29,7 +30,7 @@ FALLBACK_SERVERS = ("de2.api.radio-browser.info", "at1.api.radio-browser.info")
 
 @dataclass
 class Station:
-    """Surová stanica z Radio Browser, ešte neprefiltrovaná."""
+    """A raw station from Radio Browser, not yet filtered."""
 
     uuid: str
     name: str
@@ -87,7 +88,7 @@ class Station:
 
 
 class RadioBrowser:
-    """Tenký klient s rate-limitom a striedaním mirrorov."""
+    """A thin client with a rate limit and mirror rotation."""
 
     def __init__(self, *, min_interval: float = 0.35, timeout: float = 20.0):
         self.min_interval = min_interval
@@ -145,9 +146,9 @@ class RadioBrowser:
             except (urllib.error.URLError, http.client.HTTPException,
                     TimeoutError, json.JSONDecodeError, OSError) as exc:
                 last_err = exc
-                continue  # skús ďalší mirror
+                continue  # try the next mirror
 
-        raise RuntimeError(f"Radio Browser nedostupný: {last_err}")
+        raise RuntimeError(f"Radio Browser unreachable: {last_err}")
 
     # -- API ---------------------------------------------------------------
 
@@ -166,8 +167,8 @@ class RadioBrowser:
         return [Station.from_api(r) for r in rows]
 
     def report_click(self, uuid: str) -> None:
-        """Nahlási preklik. Zdvorilosť voči prevádzkovateľom API."""
+        """Reports a clickthrough. Courtesy towards the API operators."""
         try:
             self._get(f"url/{uuid}")
         except RuntimeError:
-            pass  # štatistika nie je kritická
+            pass  # the statistic is not critical

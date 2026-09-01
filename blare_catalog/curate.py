@@ -1,14 +1,14 @@
-"""Kurácia: zo surového výpisu Radio Browser spraví katalóg, ktorý sa dá vydať.
+"""Curation: turns a raw Radio Browser dump into a catalog fit to ship.
 
-Poradie krokov je zámerné:
-  1. bezpečnosť   — nedôveryhodné URL von skôr, než sa ich čohokoľvek spýtame
-  2. kvalita      — bitrate/kodek/lastcheckok
-  3. deduplikácia — tá istá stanica býva v DB aj 5×
-  4. žáner        — kanonická taxonómia namiesto voľných tagov
-  5. poradie      — obľúbenosť, aby prvá obrazovka nebola náhoda
+The order of the steps is deliberate:
+  1. safety        — untrusted URLs out before we ask them anything
+  2. quality       — bitrate/codec/lastcheckok
+  3. deduplication — the same station shows up in the DB up to 5 times
+  4. genre         — a canonical taxonomy instead of free-form tags
+  5. ordering      — popularity, so the first screen is not an accident
 
-Editorský zoznam (curated.json) stojí NAD týmto všetkým a vždy vyhráva —
-to je vrstva, ktorá z databázového výpisu robí produkt.
+The editorial list (curated.json) sits ABOVE all of this and always wins — that
+is the layer that turns a database dump into a product.
 """
 
 from __future__ import annotations
@@ -23,13 +23,13 @@ from . import genres
 from .net import UnsafeURL, validate_url
 from .radiobrowser import Station
 
-# Kodeky, ktoré AVPlayer aj Media3 zvládnu bez servírovania.
+# Codecs both AVPlayer and Media3 handle without transcoding.
 GOOD_CODECS = frozenset({"MP3", "AAC", "AAC+", "AACP", "OGG", "FLAC"})
 
 
 @dataclass
 class Gate:
-    """Kvalitatívna brána. Voľnejšia pre reč, prísnejšia pre hudbu."""
+    """Quality gate. Looser for speech, stricter for music."""
 
     min_bitrate_music: int = 96
     min_bitrate_speech: int = 48
@@ -53,27 +53,27 @@ class Stats:
 
     def report(self) -> str:
         lines = [
-            f"  vstup:            {self.total}",
-            f"  – nebezpečná URL: {self.dropped_unsafe}",
-            f"  – označená mŕtva: {self.dropped_dead}",
-            f"  – zlý kodek:      {self.dropped_codec}",
-            f"  – nízky bitrate:  {self.dropped_bitrate}",
-            f"  – duplicita:      {self.dropped_duplicate}",
-            f"  = ponechané:      {self.kept}",
-            f"    so žánrom:      {self.with_genre}",
-            f"    so súradnicami: {self.with_geo}",
+            f"  input:            {self.total}",
+            f"  – unsafe URL:     {self.dropped_unsafe}",
+            f"  – marked dead:    {self.dropped_dead}",
+            f"  – bad codec:      {self.dropped_codec}",
+            f"  – low bitrate:    {self.dropped_bitrate}",
+            f"  – duplicate:      {self.dropped_duplicate}",
+            f"  = kept:           {self.kept}",
+            f"    with genre:     {self.with_genre}",
+            f"    with coords:    {self.with_geo}",
         ]
         top = sorted(self.by_genre.items(), key=lambda kv: -kv[1])[:12]
         if top:
-            lines.append("  žánre: " + ", ".join(f"{g}={n}" for g, n in top))
+            lines.append("  genres: " + ", ".join(f"{g}={n}" for g, n in top))
         return "\n".join(lines)
 
 
 def dedup_key(station: Station) -> str:
-    """Kľúč na rozpoznanie tej istej stanice pod viacerými záznamami.
+    """Key for recognizing the same station under several records.
 
-    Normalizuje sa host + cesta; query sa zahadzuje (býva v nej session id),
-    rovnako koncové lomítko a veľkosť písmen v hoste.
+    Host + path are normalized; the query is dropped (it tends to carry a
+    session id), as are a trailing slash and the case of the host.
     """
     url = station.url_resolved or station.url
     parts = urlsplit(url)
@@ -93,10 +93,10 @@ def curate(
     gate: Gate | None = None,
     check_dns: bool = False,
 ) -> tuple[list[dict], Stats]:
-    """Prefiltruje a obohatí stanice. Vracia (katalóg, štatistika).
+    """Filters and enriches stations. Returns (catalog, stats).
 
-    `check_dns=False` je default: tvarová kontrola URL je lacná a offline,
-    DNS overenie 50 000 hostov patrí až do sondovacej fázy.
+    `check_dns=False` is the default: the shape check on a URL is cheap and
+    offline, while DNS-verifying 50 000 hosts belongs to the probing phase.
     """
     gate = gate or Gate()
     stats = Stats(total=len(stations))
@@ -121,7 +121,7 @@ def curate(
 
         genre_list = genres.classify(st.tags, st.name)
         floor = gate.min_bitrate_speech if _is_speech(genre_list, gate) else gate.min_bitrate_music
-        # bitrate 0 = neznámy, nie zlý; sonda ho zistí neskôr
+        # bitrate 0 = unknown, not bad; the probe finds it out later
         if st.bitrate and st.bitrate < floor:
             stats.dropped_bitrate += 1
             continue
@@ -148,7 +148,7 @@ def curate(
             seen[key] = entry
             continue
         stats.dropped_duplicate += 1
-        # Z duplicít si necháme tú s lepším bitrate, pri zhode obľúbenejšiu.
+        # Of the duplicates we keep the better bitrate, then the more popular.
         better = (entry["bitrate"], entry["popularity"]) > (prev["bitrate"], prev["popularity"])
         if better:
             seen[key] = entry
@@ -164,10 +164,10 @@ def curate(
 
 
 def apply_editorial(catalog: list[dict], curated_path: Path) -> list[dict]:
-    """Editorský zoznam ide na vrch a prepíše názov/žánre z databázy.
+    """The editorial list goes on top and overrides name/genres from the DB.
 
-    Toto je vrstva, ktorá robí rozdiel medzi kurátorovaným rádiom
-    a výpisom z databázy.
+    This is the layer that makes the difference between curated radio and a
+    database dump.
     """
     if not curated_path.exists():
         return catalog
@@ -183,7 +183,7 @@ def apply_editorial(catalog: list[dict], curated_path: Path) -> list[dict]:
             featured.append(merged)
         else:
             rest.append(entry)
-    # Editorské stanice, ktoré v databáze vôbec nie sú (napr. vlastné streamy).
+    # Editorial stations absent from the database entirely (e.g. own streams).
     for leftover in by_url.values():
         featured.append({**leftover, "featured": True, "genres": leftover.get("genres", [])})
     return featured + rest
@@ -198,7 +198,7 @@ def dedup_key_from_url(url: str) -> str:
 
 
 def to_triage_input(catalog: list[dict]) -> list[dict]:
-    """Prevod do tvaru, ktorý žerie StreamTriage na simulátore."""
+    """Conversion into the shape StreamTriage on the simulator eats."""
     return [
         {
             "name": e["name"],

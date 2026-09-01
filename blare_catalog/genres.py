@@ -1,11 +1,11 @@
-"""Mapovanie voľných tagov na kanonické žánre.
+"""Mapping free-form tags onto canonical genres.
 
-Tagy v Radio Browser píše ktokoľvek, v akomkoľvek jazyku a pravopise:
+Radio Browser tags are written by anyone, in any language and spelling:
 `rock`, `rockmusic`, `Rock Music`, `rockova hudba`, `Рок`, `classicrock`.
-Bez tejto vrstvy je "filtrovanie podľa žánru" iba fulltext nad chaosom.
+Without this layer "filter by genre" is just full-text search over chaos.
 
-Poradie v CANONICAL rozhoduje: prvá zhoda vyhráva, takže špecifickejšie
-žánre (classic rock) musia stáť pred všeobecnými (rock).
+The order in CANONICAL decides: first match wins, so more specific genres
+(classic rock) have to come before general ones (rock).
 """
 
 from __future__ import annotations
@@ -13,7 +13,7 @@ from __future__ import annotations
 import re
 import unicodedata
 
-# Kanonické žánre, od najšpecifickejšieho po najvšeobecnejší.
+# Canonical genres, from the most specific to the most general.
 CANONICAL: list[tuple[str, tuple[str, ...]]] = [
     ("classic-rock", (
         "classic rock", "classicrock", "classicalrock", "klassik rock",
@@ -100,7 +100,7 @@ CANONICAL: list[tuple[str, tuple[str, ...]]] = [
     ("relax", ("relax", "meditation", "spa", "easy listening", "easylistening", "instrumental", "new age", "sleep")),
 ]
 
-# Tagy, ktoré nenesú žánrovú informáciu — nesmú spôsobiť zaradenie.
+# Tags carrying no genre information — they must never cause a classification.
 NOISE = frozenset({
     "music", "radio", "fm", "am", "online", "internet", "internet radio",
     "live", "stream", "streaming", "24/7", "hd", "stereo", "webradio",
@@ -110,7 +110,7 @@ NOISE = frozenset({
     "non commercial", "noncommercial", "non-commercial", "college radio",
     "orf", "bbc", "npr", "rtvs", "ard", "regional", "national",
     "dj", "community radio", "adult", "classic hits", "hits music",
-    # ES/PT/FR/DE ekvivalenty slov "hudba", "stanica", "zábava", "rádio"
+    # ES/PT/FR/DE equivalents of "music", "station", "entertainment", "radio"
     "musica", "musique", "musik", "estacion", "emisora", "radio online",
     "entretenimiento", "divertissement", "unterhaltung", "espanol",
     "espanola", "portugues", "deutsch", "francais", "english", "italiano",
@@ -125,7 +125,7 @@ for _genre, _syns in CANONICAL:
 
 
 def normalize(tag: str) -> str:
-    """Zjednotí diakritiku, oddeľovače a medzery."""
+    """Unifies diacritics, separators and whitespace."""
     t = unicodedata.normalize("NFKD", tag.strip().lower())
     t = "".join(c for c in t if not unicodedata.combining(c))
     t = re.sub(r"[_\-/|]+", " ", t)
@@ -133,13 +133,13 @@ def normalize(tag: str) -> str:
     return t.strip()
 
 
-# Dekádové tagy sa píšu v desiatkach variantov: 80s, 80's, 80er, 1980s,
-# anos 80, 00s, 2000s… Regex ich pokryje všetky namiesto vymenúvania.
+# Decade tags are written in dozens of variants: 80s, 80's, 80er, 1980s,
+# anos 80, 00s, 2000s… A regex covers them all instead of enumerating them.
 _DECADE_RE = re.compile(r"^(19|20)?[0-9]0\s*(s|'s|er|er jahre|te|ties)?$")
 
 
 def classify_tag(tag: str) -> str | None:
-    """Jeden tag → kanonický žáner, alebo None."""
+    """One tag → canonical genre, or None."""
     t = normalize(tag)
     if not t or t in NOISE:
         return None
@@ -147,7 +147,7 @@ def classify_tag(tag: str) -> str | None:
         return _SYNONYM_INDEX[t]
     if _DECADE_RE.match(t.replace("'", "'")):
         return "oldies"
-    # Voľnejšia zhoda: tag obsahuje synonymum ako celé slovo.
+    # Looser match: the tag contains a synonym as a whole word.
     for genre, syns in CANONICAL:
         for syn in syns:
             if re.search(rf"(^|\s){re.escape(syn)}($|\s)", t):
@@ -156,10 +156,10 @@ def classify_tag(tag: str) -> str | None:
 
 
 def classify(tags: list[str], name: str = "") -> list[str]:
-    """Zoznam tagov (+ názov ako záloha) → kanonické žánre, bez duplicít.
+    """List of tags (+ name as a fallback) → canonical genres, deduplicated.
 
-    Názov sa používa len keď tagy nedali nič — veľa staníc má žáner
-    iba v názve ("Rock Antenne", "Jazz FM").
+    The name is only used when the tags gave nothing — plenty of stations carry
+    their genre in the name alone ("Rock Antenne", "Jazz FM").
     """
     out: list[str] = []
     for tag in tags:
@@ -174,10 +174,10 @@ def classify(tags: list[str], name: str = "") -> list[str]:
 
 
 def coverage(all_tags: dict[str, int]) -> tuple[int, int, list[tuple[str, int]]]:
-    """Diagnostika: koľko výskytov tagov vieme zaradiť + čo nám uniká.
+    """Diagnostics: how many tag occurrences we can classify + what escapes us.
 
-    Slúži na rast taxonómie — nezaradené tagy zoradené podľa početnosti
-    sú presne zoznam, čo doplniť ako ďalšie.
+    This is how the taxonomy grows — unclassified tags ordered by frequency are
+    exactly the list of what to add next.
     """
     hit = miss = 0
     unmapped: dict[str, int] = {}

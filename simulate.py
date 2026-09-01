@@ -1,29 +1,30 @@
 #!/usr/bin/env python3
-"""Oplatí sa vyhľadávanie interpretov programovať? Monte Carlo na nameraných dátach.
+"""Is artist search worth building? Monte Carlo over measured data.
 
-Parametre NIE sú odhadnuté — pochádzajú z meraní na živých staniciach:
-  * zmena skladby raz za ~233 s  (23 zmien / 51 staníc / 105 s)
-  * 36 % staníc sledovateľných bez sťahovania zvuku
-  * hodinový zber = 24 vzoriek na stanicu denne
+The parameters are NOT estimates — they come from measurements on live
+stations:
+  * a track change every ~233 s  (23 changes / 51 stations / 105 s)
+  * 36 % of stations watchable without pulling audio
+  * hourly harvesting = 24 samples per station per day
 """
 import random, statistics
 
 SONG_SECONDS = 233.0
 SONGS_PER_DAY = 86400 / SONG_SECONDS          # ~371
-SAMPLES_PER_DAY = 24                           # hodinový zber
+SAMPLES_PER_DAY = 24                           # hourly harvesting
 SAMPLE_RATE = SAMPLES_PER_DAY / SONGS_PER_DAY  # ~6.5 %
 
 def zipf_rotation(k=300, exponent=1.0):
-    """Rotácia stanice: k interpretov, Zipf rozdelenie hrania."""
+    """A station's rotation: k artists, Zipf-distributed airplay."""
     w = [1.0 / (i ** exponent) for i in range(1, k + 1)]
     total = sum(w)
     return [x / total for x in w]
 
 print("=" * 62)
-print("SIMULÁCIA 1 — ako rýchlo index dozreje")
+print("SIMULATION 1 — how fast the index matures")
 print("=" * 62)
-print(f"vzorkovacia miera: {SAMPLE_RATE*100:.1f} % odohraných skladieb\n")
-print(f"{'hraní/deň':>10} {'7 dní':>9} {'30 dní':>9} {'90 dní':>9}")
+print(f"sampling rate: {SAMPLE_RATE*100:.1f} % of tracks played\n")
+print(f"{'plays/day':>10} {'7 days':>9} {'30 days':>9} {'90 days':>9}")
 for plays_per_day in (10, 5, 3, 2, 1, 0.5, 0.14):
     row = []
     for days in (7, 30, 90):
@@ -33,12 +34,12 @@ for plays_per_day in (10, 5, 3, 2, 1, 0.5, 0.14):
     print(f"{label:>10} {row[0]} {row[1]} {row[2]}")
 
 print("\n" + "=" * 62)
-print("SIMULÁCIA 2 — pokrytie rotácie stanice v čase")
+print("SIMULATION 2 — coverage of a station's rotation over time")
 print("=" * 62)
 random.seed(11)
 probs = zipf_rotation()
 def coverage_after(days, trials=300):
-    """Aký podiel ODOHRANÝCH skladieb pochádza od už objavených interpretov."""
+    """What share of tracks PLAYED comes from artists already discovered."""
     res = []
     for _ in range(trials):
         seen = set()
@@ -47,33 +48,33 @@ def coverage_after(days, trials=300):
         res.append(sum(probs[i] for i in seen))
     return statistics.mean(res)
 for d in (1, 3, 7, 14, 30, 60, 90):
-    print(f"  po {d:>2} dňoch: {coverage_after(d)*100:>5.1f} % hrania pokrytého")
+    print(f"  after {d:>2} days: {coverage_after(d)*100:>5.1f} % of airplay covered")
 
 print("\n" + "=" * 62)
-print("SIMULÁCIA 3 — ako dlho čakať na živý zásah (lov)")
+print("SIMULATION 3 — how long to wait for a live hit (the hunt)")
 print("=" * 62)
-print("Bazén staníc, ktoré daného interpreta hrávajú:\n")
-print(f"{'staníc':>7} {'3×/deň':>12} {'1×/deň':>12} {'1×/týž':>12}")
+print("Pool of stations that play the given artist:\n")
+print(f"{'stations':>8} {'3×/day':>12} {'1×/day':>12} {'1×/week':>12}")
 for pool in (5, 10, 25, 50):
     row = []
     for rate in (3, 1, 1/7):
         hits_per_hour = pool * rate / 24
         wait_min = 60 / hits_per_hour if hits_per_hour else float('inf')
         row.append(f"{wait_min:>9.0f} min" if wait_min < 600 else f"{wait_min/60:>9.1f} h")
-    print(f"{pool:>7} {row[0]} {row[1]} {row[2]}")
+    print(f"{pool:>8} {row[0]} {row[1]} {row[2]}")
 
 print("\n" + "=" * 62)
-print("SIMULÁCIA 4 — úspešnosť vyhľadávania")
+print("SIMULATION 4 — search success rate")
 print("=" * 62)
-print("Dopyty používateľov aj rotácie sú Zipf. Otázka: aký podiel")
-print("hľadaní niečo nájde, podľa veľkosti katalógu.\n")
+print("User queries and rotations are both Zipf. The question: what share")
+print("of searches finds something, as a function of catalog size.\n")
 random.seed(7)
 UNIVERSE = 20000
 query_w = [1.0/(i**0.8) for i in range(1, UNIVERSE+1)]
 qs = sum(query_w); query_w = [x/qs for x in query_w]
 
 def hit_rate(n_stations, days=30, trials=4000):
-    """Interpret je nájditeľný, ak ho aspoň jedna stanica hrá dosť často."""
+    """An artist is findable if at least one station plays them often enough."""
     covered = set()
     for _ in range(n_stations):
         depth = random.randint(150, 500)
@@ -88,4 +89,4 @@ def hit_rate(n_stations, days=30, trials=4000):
     return hits / trials
 
 for n in (230, 500, 1000, 3000):
-    print(f"  {n:>5} sledovateľných staníc → {hit_rate(n)*100:>5.1f} % hľadaní uspeje")
+    print(f"  {n:>5} watchable stations → {hit_rate(n)*100:>5.1f} % of searches succeed")

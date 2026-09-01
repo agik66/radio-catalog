@@ -1,8 +1,8 @@
-"""Označí stanice, ktoré sa dajú sledovať bez sťahovania zvuku.
+"""Marks the stations that can be watched without pulling audio.
 
-`watchable` je kurátorské kritérium, ktoré nikto iný nepoužíva: rozhoduje,
-či stanica môže byť v bazéne pre živý lov a mix. Neznamená to lepšiu
-stanicu — len sledovateľnú.
+`watchable` is a curatorial criterion nobody else uses: it decides whether a
+station may sit in the pool for the live hunt and for MIX. It does not mean a
+better station — only a watchable one.
 """
 
 from __future__ import annotations
@@ -14,9 +14,9 @@ from .nowplaying import probe
 
 def annotate_watchable(catalog: list[dict], *, workers: int = 16,
                        timeout: float = 6.0) -> int:
-    """Doplní do každej položky `watchable` a `nowplaying_endpoint`.
+    """Adds `watchable` and `nowplaying_endpoint` to every entry.
 
-    Vracia počet sledovateľných staníc.
+    Returns the number of watchable stations.
     """
     def check(entry: dict) -> tuple[dict, object]:
         return entry, probe(entry["url"], timeout=timeout)

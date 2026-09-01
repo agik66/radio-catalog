@@ -1,14 +1,15 @@
-"""Bezpečnostná vrstva pre prácu s cudzími URL.
+"""Security layer for handling foreign URLs.
 
-Katalóg sa dotýka desiatok tisíc URL, ktoré do Radio Browser zapísal ktokoľvek.
-Sú to nedôveryhodné dáta, nie konfigurácia. Táto vrstva rieši dve veci:
+The catalog touches tens of thousands of URLs that anyone at all was able to
+write into Radio Browser. That is untrusted data, not configuration. This layer
+handles two things:
 
-1. SSRF — bez nej je `http://127.0.0.1:2019/config/` platná "stanica"
-   a sonda ju poslušne zavolá. Na tomto stroji je to admin API Caddy.
-2. Protokolové finty — ffmpeg má skompilované `file`, `concat`, `data`
-   a ďalšie; bez whitelistu je `ffprobe <url>` čítanie lokálnych súborov.
+1. SSRF — without it `http://127.0.0.1:2019/config/` is a valid "station" and
+   the probe will dutifully call it. On this machine that is Caddy's admin API.
+2. Protocol tricks — ffmpeg ships with `file`, `concat`, `data` and others
+   compiled in; without a whitelist `ffprobe <url>` is a local file read.
 
-Zámerne bez závislostí — beží to na holom Pythone.
+Deliberately dependency-free — this runs on bare Python.
 """
 
 from __future__ import annotations
@@ -20,21 +21,21 @@ from urllib.parse import urlsplit
 
 ALLOWED_SCHEMES = frozenset({"http", "https"})
 
-# Protokoly, ktoré smie ffprobe použiť. Všetko ostatné (file, concat, data,
-# unix, gopher, rtp…) je vypnuté — inak je URL vektor na čítanie disku.
+# Protocols ffprobe may use. Everything else (file, concat, data, unix,
+# gopher, rtp…) is off — otherwise a URL is a vector for reading the disk.
 FFPROBE_PROTOCOL_WHITELIST = "http,https,tcp,tls,crypto"
 
-# Porty, na ktoré sa neoplatí chodiť ani keď IP prejde.
+# Ports not worth visiting even when the IP passes.
 BLOCKED_PORTS = frozenset({22, 23, 25, 445, 3306, 5432, 6379, 11211, 27017})
 
 
 class UnsafeURL(Exception):
-    """URL neprešla bezpečnostnou kontrolou."""
+    """The URL failed the security check."""
 
 
 @dataclass(frozen=True)
 class ResolvedTarget:
-    """URL, ktorej sme rozlúskli DNS a schválili cieľové IP."""
+    """A URL whose DNS we resolved and whose target IPs we approved."""
 
     url: str
     host: str
@@ -55,39 +56,39 @@ def _is_public(ip: str) -> bool:
 
 
 def validate_url(raw: str) -> tuple[str, int]:
-    """Overí tvar URL. Vracia (host, port). Nerobí DNS."""
+    """Checks the shape of a URL. Returns (host, port). Does no DNS."""
     if not raw or len(raw) > 2048:
-        raise UnsafeURL("prázdna alebo neúmerne dlhá URL")
+        raise UnsafeURL("empty or disproportionately long URL")
 
     parts = urlsplit(raw.strip())
     if parts.scheme.lower() not in ALLOWED_SCHEMES:
-        raise UnsafeURL(f"nepovolená schéma: {parts.scheme!r}")
+        raise UnsafeURL(f"scheme not allowed: {parts.scheme!r}")
 
     host = parts.hostname
     if not host:
-        raise UnsafeURL("chýba host")
+        raise UnsafeURL("host missing")
 
     port = parts.port or (443 if parts.scheme.lower() == "https" else 80)
     if port in BLOCKED_PORTS:
-        raise UnsafeURL(f"zakázaný port: {port}")
+        raise UnsafeURL(f"forbidden port: {port}")
     if not (1 <= port <= 65535):
-        raise UnsafeURL(f"neplatný port: {port}")
+        raise UnsafeURL(f"invalid port: {port}")
 
-    # Host zapísaný priamo ako IP musí byť verejná.
+    # A host written directly as an IP has to be a public one.
     try:
         if not _is_public(host):
-            raise UnsafeURL(f"neverejná IP v URL: {host}")
+            raise UnsafeURL(f"non-public IP in URL: {host}")
     except ValueError:
-        pass  # nie je IP literál, je to doménové meno — rieši resolve_target
+        pass  # not an IP literal, it is a domain name — resolve_target handles it
 
     return host, port
 
 
 def resolve_target(raw: str, *, timeout: float = 5.0) -> ResolvedTarget:
-    """Overí URL a rozlúskne DNS. Odmietne, ak KTORÁKOĽVEK adresa je neverejná.
+    """Checks a URL and resolves DNS. Rejects if ANY address is non-public.
 
-    Odmietame pri akejkoľvek neverejnej adrese, nie len pri prvej — inak
-    útočník s viacerými A záznamami preleze cez DNS rebinding.
+    Rejecting on any non-public address, not just the first one — otherwise an
+    attacker with several A records gets through by DNS rebinding.
     """
     host, port = validate_url(raw)
 
@@ -96,23 +97,23 @@ def resolve_target(raw: str, *, timeout: float = 5.0) -> ResolvedTarget:
     try:
         infos = socket.getaddrinfo(host, port, proto=socket.IPPROTO_TCP)
     except (OSError, socket.gaierror) as exc:
-        raise UnsafeURL(f"DNS zlyhalo: {exc}") from exc
+        raise UnsafeURL(f"DNS failed: {exc}") from exc
     finally:
         socket.setdefaulttimeout(old)
 
     addresses = tuple(sorted({info[4][0] for info in infos}))
     if not addresses:
-        raise UnsafeURL("DNS nevrátilo žiadnu adresu")
+        raise UnsafeURL("DNS returned no address")
 
     for ip in addresses:
         if not _is_public(ip):
-            raise UnsafeURL(f"host {host} ukazuje na neverejnú adresu {ip}")
+            raise UnsafeURL(f"host {host} points at non-public address {ip}")
 
     return ResolvedTarget(url=raw, host=host, port=port, addresses=addresses)
 
 
 def is_safe(raw: str) -> bool:
-    """Pohodlný predikát pre filtrovanie zoznamov."""
+    """Convenience predicate for filtering lists."""
     try:
         resolve_target(raw)
         return True

@@ -1,14 +1,14 @@
 name: rebuild-catalog
 
-# Katalóg sa mení pomaly — týždenne stačí. Prestavia ho a znovu zistí,
-# ktoré stanice sú sledovateľné.
+# The catalog changes slowly — weekly is enough. Rebuilds it and re-checks
+# which stations are watchable.
 on:
   schedule:
-    - cron: "40 3 * * 1"   # pondelok nadránom
+    - cron: "40 3 * * 1"   # early Monday morning
   workflow_dispatch:
 
 concurrency:
-  group: harvest          # nesmie bežať súčasne so zberom
+  group: harvest          # must not run at the same time as the harvest
   cancel-in-progress: false
 
 permissions:
@@ -23,14 +23,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Prestavba katalógu
+      - name: Rebuild the catalog
         run: |
           python build.py --countries SK,CZ,DE,GB,US,PL,AT,HU,FR,IT,ES,NL \
             --tags rock,jazz,metal,electronic,classical \
             --limit 800 --out dist --watchable
       - name: Commit
         run: |
-          git config user.name  "cliamp-harvester"
+          git config user.name  "blare-harvester"
           git config user.email "harvester@users.noreply.github.com"
           git add dist/
           git diff --staged --quiet || git commit -m "catalog: $(date -u +%F)"

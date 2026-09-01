@@ -1,7 +1,7 @@
 __pycache__/
 *.pyc
-# dist/ sú generované súbory, ALE catalog.json a artist_index.json sú
-# samotný produkt — appka si ich ťahá z CDN, takže musia byť v repe.
+# dist/ holds generated files, BUT catalog.json and artist_index.json are the
+# product itself — the app pulls them from a CDN, so they must be in the repo.
 dist/*
 !dist/catalog.json
 !dist/artist_index.json
