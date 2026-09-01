@@ -15,8 +15,8 @@ Výstupy: `catalog.json` (pre appku), `triage_input.json` (pre sondu),
 Databáza vie klamať — `lastcheckok` má presnosť ~95 %. Skutočný test je
 prehratie cez reálny AVFoundation stack:
 
-    cd ../Blare
-    ./scripts/triage.sh ../radio-catalog/dist/triage_input.json verified.json 8 20
+    cd ../Blare_ios
+    ./scripts/triage.sh ../catalog/dist/triage_input.json verified.json 8 20
 
 ## Vrstvy
 

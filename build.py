@@ -116,8 +116,8 @@ def main() -> int:
 
     print(f"\nzapísané do {out}/  (catalog.json, triage_input.json, stats.json)")
     print(f"ďalší krok: overenie na simulátore\n"
-          f"  cd ../Blare && ./scripts/triage.sh "
-          f"../radio-catalog/{out}/triage_input.json /tmp/verified.json 8 20")
+          f"  cd ../Blare_ios && ./scripts/triage.sh "
+          f"../catalog/{out}/triage_input.json /tmp/verified.json 8 20")
     return 0
 
 
