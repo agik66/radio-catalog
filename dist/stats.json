@@ -7,7 +7,11 @@
  "dropped_bitrate": 2229,
  "dropped_duplicate": 4315,
  "with_genre": 7303,
- "with_geo": 2633,
+ "with_geo": 2612,
+ "geo_dropped_wrong_country": 21,
+ "geo_unverifiable_country": 1,
+ "geo_drop_rate_pct": 0.8,
+ "geo_margin_deg": 2.0,
  "taxonomy_coverage_pct": 61.6,
  "by_genre": {
   "electronic": 1284,

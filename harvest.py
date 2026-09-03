@@ -40,6 +40,11 @@ def collect(stations: list[dict], *, workers: int = 12,
             "artist": result.artist,
             "artist_key": normalize_artist(result.artist),
             "track": result.track,
+            # The line as the station sent it. `artist`/`artist_key` above are
+            # `parse_title`'s POSITIONAL reading and are wrong on every
+            # track-first station; the raw line is the only field downstream
+            # consumers can trust about which words were in the title.
+            "raw": result.raw,
         }
 
     seen: list[dict] = []
@@ -72,6 +77,41 @@ def merge(index: dict, observations: list[dict], *, stamp: str) -> tuple[int, in
     index["updated"] = stamp
     index["rounds"] = index.get("rounds", 0) + 1
     return new, len(pairs)
+
+
+def merge_halves(halves: dict, observations: list[dict], *, limit: int = 200_000) -> int:
+    """Fold both halves of every raw title into a bounded frequency table.
+
+    THIS IS THE ONLY OUTPUT OF THE HARVEST THE ORIENTATION LEXICON MAY READ, and
+    it is deliberately shapeless: a bag of strings that appeared on one side or
+    the other of a separator, with no claim about which side. `parse_title`
+    splits by position and is wrong on every track-first station, so anything
+    derived from its `artist` field would carry that error into the resolver
+    that exists to correct it (see `build_lexicon.py`). Both halves go in;
+    MusicBrainz decides which of them is a real artist name.
+
+    Bounded because this file is committed every hour. The rarest strings are
+    dropped first, and a name that a station really plays comes back.
+    """
+    from blare_catalog.orientation import fold, split_halves
+
+    new = 0
+    for obs in observations:
+        raw = " ".join((obs.get("raw") or "").split())
+        pieces = split_halves(raw)
+        if not pieces:
+            continue
+        for piece in pieces:
+            key = fold(piece)
+            if not key or len(key) > 120:
+                continue
+            if key not in halves:
+                new += 1
+            halves[key] = halves.get(key, 0) + 1
+    if len(halves) > limit:
+        for key, _ in sorted(halves.items(), key=lambda kv: kv[1])[:len(halves) - limit]:
+            del halves[key]
+    return new
 
 
 def build_search_index(index: dict, catalog: list[dict], *,
@@ -170,6 +210,13 @@ def main() -> int:
 
     index_path.write_text(json.dumps(index, ensure_ascii=False,
                                      separators=(",", ":"), sort_keys=True), "utf-8")
+
+    halves_path = data_dir / "halves.json"
+    halves = json.loads(halves_path.read_text("utf-8")) if halves_path.exists() else {}
+    fresh = merge_halves(halves, observations)
+    halves_path.write_text(json.dumps(halves, ensure_ascii=False,
+                                      separators=(",", ":"), sort_keys=True), "utf-8")
+    print(f"[harvest] title halves: {fresh} new · {len(halves)} total")
 
     groups: list[simulcast.Group] = []
     if args.simulcast:

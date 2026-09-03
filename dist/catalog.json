@@ -24034,10 +24034,7 @@
   "codec": "MP3",
   "bitrate": 128,
   "popularity": 2067,
-  "geo": [
-   46.799618781849176,
-   -71.22573852539064
-  ],
+  "geo": null,
   "favicon": "",
   "watchable": true,
   "nowplaying_endpoint": "/stats?json=1"
@@ -28334,10 +28331,7 @@
   "codec": "MP3",
   "bitrate": 0,
   "popularity": 1687,
-  "geo": [
-   51.299925466442645,
-   10.118408203125002
-  ],
+  "geo": null,
   "favicon": "",
   "watchable": false,
   "nowplaying_endpoint": null
@@ -41437,10 +41431,7 @@
   "codec": "MP3",
   "bitrate": 128,
   "popularity": 958,
-  "geo": [
-   18.812717856407776,
-   -38.92186400853982
-  ],
+  "geo": null,
   "favicon": "https://schwarzwaldradio.com/apple-touch-icon.png",
   "watchable": false,
   "nowplaying_endpoint": null
@@ -88989,10 +88980,7 @@
   "codec": "AAC",
   "bitrate": 49,
   "popularity": 215,
-  "geo": [
-   16.933332619157774,
-   9.404296875000002
-  ],
+  "geo": null,
   "favicon": "",
   "watchable": true,
   "nowplaying_endpoint": "/status-json.xsl"
@@ -97136,10 +97124,7 @@
   "codec": "MP3",
   "bitrate": 128,
   "popularity": 176,
-  "geo": [
-   27.98171891564362,
-   -80.6017674460188
-  ],
+  "geo": null,
   "favicon": "https://radio.gamesboro.org/static/uploads/browser_icon/original.1693066595.png",
   "watchable": false,
   "nowplaying_endpoint": null
@@ -102404,10 +102389,7 @@
   "codec": "MP3",
   "bitrate": 320,
   "popularity": 154,
-  "geo": [
-   61.873513926826575,
-   130.94359874725345
-  ],
+  "geo": null,
   "favicon": "",
   "watchable": true,
   "nowplaying_endpoint": "/status-json.xsl"
@@ -126701,10 +126683,7 @@
   "codec": "AAC",
   "bitrate": 320,
   "popularity": 82,
-  "geo": [
-   -4.637407390559067,
-   55.460014343261726
-  ],
+  "geo": null,
   "favicon": "http://www.radiouniquefm.nl/wp-content/uploads/2021/12/sticker_geel.gif",
   "watchable": false,
   "nowplaying_endpoint": null
@@ -128382,10 +128361,7 @@
   "codec": "MP3",
   "bitrate": 128,
   "popularity": 79,
-  "geo": [
-   38.91013665250296,
-   1.436290740966797
-  ],
+  "geo": null,
   "favicon": "",
   "watchable": true,
   "nowplaying_endpoint": "/status-json.xsl"
@@ -155798,10 +155774,7 @@
   "codec": "MP3",
   "bitrate": 0,
   "popularity": 37,
-  "geo": [
-   50.89339778855447,
-   6.967622637748718
-  ],
+  "geo": null,
   "favicon": "https://www.deutschlandfunk.de/presseschauen-100.html",
   "watchable": false,
   "nowplaying_endpoint": null
@@ -156429,10 +156402,7 @@
   "codec": "MP3",
   "bitrate": 128,
   "popularity": 37,
-  "geo": [
-   40.65980593837852,
-   -74.02587890625001
-  ],
+  "geo": null,
   "favicon": "https://mrg.fm/img/mondelloradio125.jpg",
   "watchable": true,
   "nowplaying_endpoint": "/stats?json=1"
@@ -164011,10 +163981,7 @@
   "codec": "MP3",
   "bitrate": 192,
   "popularity": 29,
-  "geo": [
-   12.345,
-   -23.456
-  ],
+  "geo": null,
   "favicon": "https://example.com/besticon.png",
   "watchable": false,
   "nowplaying_endpoint": null
@@ -166722,10 +166689,7 @@
   "codec": "MP3",
   "bitrate": 96,
   "popularity": 27,
-  "geo": [
-   30.06570513100005,
-   -46.77539397505723
-  ],
+  "geo": null,
   "favicon": "https://ozfm.com/favicon.ico",
   "watchable": false,
   "nowplaying_endpoint": null
@@ -176219,10 +176183,7 @@
   "codec": "MP3",
   "bitrate": 320,
   "popularity": 20,
-  "geo": [
-   26.933824819628494,
-   19.91271142591849
-  ],
+  "geo": null,
   "favicon": "",
   "watchable": false,
   "nowplaying_endpoint": null
@@ -177574,10 +177535,7 @@
   "codec": "AAC",
   "bitrate": 151,
   "popularity": 19,
-  "geo": [
-   28.723629275173927,
-   33.04687500000001
-  ],
+  "geo": null,
   "favicon": "",
   "watchable": false,
   "nowplaying_endpoint": null
@@ -177838,10 +177796,7 @@
   "codec": "MP3",
   "bitrate": 128,
   "popularity": 19,
-  "geo": [
-   -67.21888450424002,
-   20.13881136277664
-  ],
+  "geo": null,
   "favicon": "https://mizrahit.fm/wp-content/uploads/2020/04/diki-logo-official-e1734684643817-700x525.jpg",
   "watchable": false,
   "nowplaying_endpoint": null
@@ -193780,10 +193735,7 @@
   "codec": "MP3",
   "bitrate": 0,
   "popularity": 11,
-  "geo": [
-   76.84483738269991,
-   -66.48890250640613
-  ],
+  "geo": null,
   "favicon": "http://zeus.hidencloud.com:24724/stream_bot1",
   "watchable": false,
   "nowplaying_endpoint": null
@@ -197772,10 +197724,7 @@
   "codec": "MP3",
   "bitrate": 320,
   "popularity": 9,
-  "geo": [
-   -45.58328975600632,
-   -31.992187500000004
-  ],
+  "geo": null,
   "favicon": "https://impactam.nl/wp-content/uploads/2022/09/cropped-impact-radio-v2.jpg",
   "watchable": true,
   "nowplaying_endpoint": "/status.xsl"
@@ -222599,10 +222548,7 @@
   "codec": "MP3",
   "bitrate": 128,
   "popularity": 3,
-  "geo": [
-   47.37220563185642,
-   8.536376953125002
-  ],
+  "geo": null,
   "favicon": "https://www.radioamigosdomundo.com/public/01100-2026-05-16.jpg",
   "watchable": true,
   "nowplaying_endpoint": "/stats?json=1"
@@ -228144,10 +228090,7 @@
   "codec": "AAC",
   "bitrate": 128,
   "popularity": 2,
-  "geo": [
-   -15.01270723975152,
-   -49.43199817310427
-  ],
+  "geo": null,
   "favicon": "https://blogger.googleusercontent.com/img/a/AVvXsEiFjuZpvO8NObJg4xbuvohiOA9-9xz5Ts80exF8_r0kycPUt_vx8D36UCecT4c1hMpBmgz_g9FoUzhVocxpJmsgXxKjKXqe-s5P5c7o7lgIbHEpejbVPMlEYioBRwOKpokdJaeRQghKznhXO6T663om4hMiXPPPFRLMfFvKh7LGCin_Sc25Iq6iDdCfrQy7=s144",
   "watchable": true,
   "nowplaying_endpoint": "/stats?json=1"
@@ -228210,10 +228153,7 @@
   "codec": "AAC",
   "bitrate": 128,
   "popularity": 2,
-  "geo": [
-   -22.716104895611807,
-   -52.6280039548874
-  ],
+  "geo": null,
   "favicon": "https://www.facebook.com/radiovidaterraricapr",
   "watchable": true,
   "nowplaying_endpoint": "/stats?json=1"
@@ -229890,10 +229830,7 @@
   "codec": "MP3",
   "bitrate": 0,
   "popularity": 2,
-  "geo": [
-   51.98758668066236,
-   5.869820680550558
-  ],
+  "geo": null,
   "favicon": "https://patrisamato.com/cover.png",
   "watchable": false,
   "nowplaying_endpoint": null

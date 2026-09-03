@@ -20,7 +20,7 @@ import json
 import sys
 from pathlib import Path
 
-from blare_catalog import genres, siblings
+from blare_catalog import country_bounds, genres, siblings
 from blare_catalog.curate import Gate, apply_editorial, curate, to_triage_input
 from blare_catalog.radiobrowser import RadioBrowser
 from blare_catalog.watchable import annotate_watchable
@@ -39,6 +39,11 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=2000, help="cap per country")
     ap.add_argument("--out", default="dist", help="output directory")
     ap.add_argument("--min-bitrate", type=int, default=96)
+    ap.add_argument("--geo-margin", type=float,
+                    default=country_bounds.DEFAULT_MARGIN_DEG, metavar="DEG",
+                    help="how far outside its own country's bounding box a "
+                         "coordinate may sit before it is dropped as false "
+                         "(degrees, default %(default)s)")
     ap.add_argument("--allow-unchecked", action="store_true",
                     help="keep stations Radio Browser marked as broken")
     ap.add_argument("--curated", default="curated.json",
@@ -119,7 +124,7 @@ def main() -> int:
 
     gate = Gate(min_bitrate_music=args.min_bitrate,
                 require_lastcheckok=not args.allow_unchecked)
-    catalog, stats = curate(raw, gate=gate)
+    catalog, stats = curate(raw, gate=gate, geo_margin=args.geo_margin)
     catalog = apply_editorial(catalog, Path(args.curated))
 
     print("\ncuration:")
@@ -173,6 +178,17 @@ def main() -> int:
         "dropped_bitrate": stats.dropped_bitrate,
         "dropped_duplicate": stats.dropped_duplicate,
         "with_genre": stats.with_genre, "with_geo": stats.with_geo,
+        # Coordinates removed because they fell outside the country the station
+        # itself claims — see blare_catalog/country_bounds.py. Tracked because
+        # it is upstream data quality we do not control: a jump here means
+        # Radio Browser has taken on a batch of bad geo, and a fall to zero
+        # means the check has quietly stopped running.
+        "geo_dropped_wrong_country": stats.geo_dropped_wrong_country,
+        "geo_unverifiable_country": stats.geo_unverifiable_country,
+        "geo_drop_rate_pct": round(
+            stats.geo_dropped_wrong_country
+            / max(1, stats.with_geo + stats.geo_dropped_wrong_country) * 100, 2),
+        "geo_margin_deg": args.geo_margin,
         "taxonomy_coverage_pct": round(cov, 1),
         "by_genre": stats.by_genre,
         "top_unmapped_tags": unmapped[:40],

@@ -5,10 +5,13 @@ The order of the steps is deliberate:
   2. quality       — bitrate/codec/lastcheckok
   3. deduplication — the same station shows up in the DB up to 5 times
   4. genre         — a canonical taxonomy instead of free-form tags
-  5. ordering      — popularity, so the first screen is not an accident
+  5. coordinates   — a coordinate that contradicts its own country is removed
+  6. ordering      — popularity, so the first screen is not an accident
 
 The editorial list (curated.json) sits ABOVE all of this and always wins — that
-is the layer that turns a database dump into a product.
+is the layer that turns a database dump into a product. That includes step 5:
+an editorial coordinate is written by us, not by a stranger, so it is not
+second-guessed.
 """
 
 from __future__ import annotations
@@ -19,7 +22,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit
 
-from . import genres
+from . import country_bounds, genres
 from .net import UnsafeURL, validate_url
 from .radiobrowser import Station
 
@@ -49,6 +52,8 @@ class Stats:
     kept: int = 0
     with_genre: int = 0
     with_geo: int = 0
+    geo_dropped_wrong_country: int = 0
+    geo_unverifiable_country: int = 0
     by_genre: dict[str, int] = field(default_factory=dict)
 
     def report(self) -> str:
@@ -62,6 +67,8 @@ class Stats:
             f"  = kept:           {self.kept}",
             f"    with genre:     {self.with_genre}",
             f"    with coords:    {self.with_geo}",
+            f"    – coords dropped: {self.geo_dropped_wrong_country} "
+            f"(outside declared country)",
         ]
         top = sorted(self.by_genre.items(), key=lambda kv: -kv[1])[:12]
         if top:
@@ -92,6 +99,7 @@ def curate(
     *,
     gate: Gate | None = None,
     check_dns: bool = False,
+    geo_margin: float = country_bounds.DEFAULT_MARGIN_DEG,
 ) -> tuple[list[dict], Stats]:
     """Filters and enriches stations. Returns (catalog, stats).
 
@@ -154,6 +162,7 @@ def curate(
             seen[key] = entry
 
     catalog = sorted(seen.values(), key=lambda e: -e["popularity"])
+    drop_false_coordinates(catalog, stats, margin=geo_margin)
     stats.kept = len(catalog)
     stats.with_genre = sum(1 for e in catalog if e["genres"])
     stats.with_geo = sum(1 for e in catalog if e["geo"])
@@ -161,6 +170,46 @@ def curate(
         for g in e["genres"]:
             stats.by_genre[g] = stats.by_genre.get(g, 0) + 1
     return catalog, stats
+
+
+def drop_false_coordinates(
+    catalog: list[dict],
+    stats: Stats | None = None,
+    *,
+    margin: float = country_bounds.DEFAULT_MARGIN_DEG,
+) -> int:
+    """Removes coordinates that fall outside the country the station claims.
+
+    The station stays; only `geo` goes to None, so it drops off the globe and
+    changes nothing else. That asymmetry is the whole point. A station with no
+    coordinate is merely missing from a map; a station with a wrong one is the
+    app stating, in the most confident form it has, something untrue — that
+    Schwarzwaldradio broadcasts from the middle of the Atlantic.
+
+    We cannot tell WHICH of the two fields is wrong. A Brazilian station filed
+    under PT has a good coordinate and a bad country; Schwarzwaldradio has a
+    good country and a nonsense coordinate. Since the country is what the rest
+    of the catalog filters and groups by, and the coordinate is the only one of
+    the two the globe renders, the coordinate is the one that goes.
+
+    Returns the number dropped.
+    """
+    dropped = 0
+    for entry in catalog:
+        geo = entry.get("geo")
+        if not geo:
+            continue
+        verdict = country_bounds.contains(
+            entry.get("country") or "", geo[0], geo[1], margin=margin)
+        if verdict is None:
+            if stats:
+                stats.geo_unverifiable_country += 1
+        elif not verdict:
+            entry["geo"] = None
+            dropped += 1
+    if stats:
+        stats.geo_dropped_wrong_country += dropped
+    return dropped
 
 
 def apply_editorial(catalog: list[dict], curated_path: Path) -> list[dict]:
