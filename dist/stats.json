@@ -1,208 +1,208 @@
 {
- "input": 16481,
- "kept": 9970,
- "dropped_unsafe": 0,
+ "input": 16457,
+ "kept": 9949,
+ "dropped_unsafe": 3,
  "dropped_dead": 0,
- "dropped_codec": 432,
- "dropped_bitrate": 2205,
- "dropped_duplicate": 3874,
- "with_genre": 6837,
- "with_geo": 2604,
- "geo_dropped_wrong_country": 31,
+ "dropped_codec": 438,
+ "dropped_bitrate": 2230,
+ "dropped_duplicate": 3837,
+ "with_genre": 6707,
+ "with_geo": 2698,
+ "geo_dropped_wrong_country": 36,
  "geo_unverifiable_country": 1,
- "geo_drop_rate_pct": 1.18,
+ "geo_drop_rate_pct": 1.32,
  "geo_margin_deg": 2.0,
- "taxonomy_coverage_pct": 62.6,
+ "taxonomy_coverage_pct": 62.2,
  "by_genre": {
-  "electronic": 1061,
-  "oldies": 832,
-  "relax": 276,
-  "jazz": 465,
-  "classical": 453,
-  "talk": 504,
-  "religious": 239,
-  "news": 1289,
-  "sport": 130,
-  "blues": 208,
-  "dance": 706,
-  "pop": 1774,
-  "rock": 1033,
-  "classic-rock": 231,
-  "hiphop": 403,
-  "soul-funk": 524,
-  "country": 123,
-  "culture": 111,
-  "folk": 419,
-  "metal": 310,
-  "hard-rock": 128,
-  "latin": 240,
-  "comedy": 39,
-  "reggae": 182,
-  "alternative": 486,
-  "punk": 228,
-  "schlager": 29,
-  "kids": 33
+  "electronic": 1108,
+  "oldies": 861,
+  "relax": 293,
+  "jazz": 506,
+  "classical": 459,
+  "talk": 418,
+  "religious": 246,
+  "news": 915,
+  "sport": 102,
+  "blues": 218,
+  "dance": 735,
+  "pop": 1761,
+  "rock": 1067,
+  "classic-rock": 217,
+  "hiphop": 419,
+  "soul-funk": 542,
+  "culture": 110,
+  "country": 127,
+  "folk": 391,
+  "metal": 300,
+  "hard-rock": 130,
+  "latin": 242,
+  "comedy": 38,
+  "reggae": 199,
+  "alternative": 473,
+  "punk": 227,
+  "schlager": 31,
+  "kids": 36
  },
  "top_unmapped_tags": [
   [
    "moi merino",
-   463
+   465
   ],
   [
    "américa",
-   313
+   321
   ],
   [
    "música en español",
-   199
+   210
+  ],
+  [
+   "experimental",
+   157
   ],
   [
    "ciudad de méxico",
-   176
+   156
   ],
   [
    "mexico city",
-   163
-  ],
-  [
-   "valle de méxico",
-   152
-  ],
-  [
-   "new wave",
-   145
+   148
   ],
   [
    "cdmx",
    145
   ],
   [
-   "experimental",
-   144
-  ],
-  [
-   "local music",
+   "valle de méxico",
    141
   ],
   [
-   "música en inglés",
-   120
-  ],
-  [
-   "radio hablada",
-   120
-  ],
-  [
    "regional radio",
-   117
+   130
   ],
   [
-   "música del recuerdo",
-   102
-  ],
-  [
-   "online only",
-   101
-  ],
-  [
-   "juvenil",
-   100
-  ],
-  [
-   "chillout+lounge",
-   98
-  ],
-  [
-   "iheart",
-   91
-  ],
-  [
-   "europe",
-   91
-  ],
-  [
-   "iheart radio",
-   91
-  ],
-  [
-   "grupo acir",
-   90
-  ],
-  [
-   "acir",
-   86
-  ],
-  [
-   "dj mixes",
-   84
+   "new wave",
+   126
   ],
   [
    "clásicos",
-   83
+   124
   ],
   [
-   "livestream",
-   79
-  ],
-  [
-   "mix",
-   79
-  ],
-  [
-   "urbano",
-   77
-  ],
-  [
-   "hablada",
-   77
-  ],
-  [
-   "música variada",
-   76
-  ],
-  [
-   "regional mexicana",
-   76
-  ],
-  [
-   "hardcore",
-   75
-  ],
-  [
-   "mexican music",
-   73
+   "local music",
+   120
   ],
   [
    "regional mexican",
-   71
+   109
   ],
   [
-   "acir online",
-   69
+   "música en inglés",
+   106
   ],
   [
-   "smooth",
-   66
+   "regional mexicana",
+   106
   ],
   [
-   "greek",
-   66
+   "juvenil",
+   101
+  ],
+  [
+   "chillout+lounge",
+   100
   ],
   [
    "música regional",
-   65
+   99
   ],
   [
-   "música mexicana",
-   65
+   "online only",
+   96
   ],
   [
-   "música regional mexicana",
-   65
+   "mexican music",
+   95
   ],
   [
-   "remixes",
-   64
+   "grupo acir",
+   89
+  ],
+  [
+   "música del recuerdo",
+   89
+  ],
+  [
+   "iheart",
+   88
+  ],
+  [
+   "acir",
+   88
+  ],
+  [
+   "iheart radio",
+   88
+  ],
+  [
+   "dj mixes",
+   87
+  ],
+  [
+   "mix",
+   87
+  ],
+  [
+   "grupera",
+   87
+  ],
+  [
+   "regional music",
+   84
+  ],
+  [
+   "relaxing",
+   78
+  ],
+  [
+   "clásicos en inglés",
+   76
+  ],
+  [
+   "programas en vivo",
+   74
+  ],
+  [
+   "europe",
+   73
+  ],
+  [
+   "música en español e inglés",
+   72
+  ],
+  [
+   "smooth",
+   69
+  ],
+  [
+   "hardcore",
+   69
+  ],
+  [
+   "música variada",
+   69
+  ],
+  [
+   "traditional mexican music",
+   69
+  ],
+  [
+   "afrobeats",
+   67
+  ],
+  [
+   "banda",
+   67
   ]
  ]
 }
