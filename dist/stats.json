@@ -1,47 +1,47 @@
 {
- "input": 16454,
+ "input": 16542,
  "kept": 9880,
- "dropped_unsafe": 2,
+ "dropped_unsafe": 0,
  "dropped_dead": 0,
- "dropped_codec": 456,
- "dropped_bitrate": 2242,
- "dropped_duplicate": 3874,
- "with_genre": 6652,
- "with_geo": 2653,
- "geo_dropped_wrong_country": 36,
+ "dropped_codec": 466,
+ "dropped_bitrate": 2262,
+ "dropped_duplicate": 3934,
+ "with_genre": 6685,
+ "with_geo": 2674,
+ "geo_dropped_wrong_country": 35,
  "geo_unverifiable_country": 1,
- "geo_drop_rate_pct": 1.34,
+ "geo_drop_rate_pct": 1.29,
  "geo_margin_deg": 2.0,
- "taxonomy_coverage_pct": 61.7,
+ "taxonomy_coverage_pct": 61.5,
  "by_genre": {
-  "electronic": 1089,
-  "oldies": 847,
-  "relax": 279,
-  "jazz": 486,
-  "classical": 450,
-  "talk": 418,
-  "religious": 243,
-  "news": 902,
-  "sport": 123,
-  "blues": 208,
-  "dance": 725,
-  "pop": 1729,
-  "rock": 1032,
-  "classic-rock": 241,
-  "hiphop": 400,
-  "soul-funk": 518,
-  "country": 126,
-  "culture": 106,
-  "folk": 408,
-  "metal": 306,
-  "hard-rock": 127,
-  "latin": 235,
-  "comedy": 37,
-  "reggae": 193,
-  "alternative": 472,
-  "punk": 230,
-  "schlager": 28,
-  "kids": 36
+  "electronic": 1091,
+  "oldies": 895,
+  "relax": 294,
+  "jazz": 493,
+  "classical": 473,
+  "talk": 413,
+  "religious": 242,
+  "news": 853,
+  "sport": 104,
+  "blues": 207,
+  "dance": 735,
+  "pop": 1768,
+  "rock": 1080,
+  "classic-rock": 234,
+  "hiphop": 426,
+  "soul-funk": 535,
+  "country": 130,
+  "culture": 104,
+  "folk": 394,
+  "metal": 288,
+  "hard-rock": 129,
+  "latin": 251,
+  "comedy": 38,
+  "reggae": 190,
+  "alternative": 476,
+  "punk": 226,
+  "schlager": 34,
+  "kids": 43
  },
  "top_unmapped_tags": [
   [
@@ -50,126 +50,134 @@
   ],
   [
    "américa",
-   360
+   355
   ],
   [
    "música en español",
-   233
+   235
   ],
   [
    "ciudad de méxico",
-   182
-  ],
-  [
-   "mexico city",
-   165
-  ],
-  [
-   "valle de méxico",
-   164
-  ],
-  [
-   "cdmx",
-   155
+   186
   ],
   [
    "experimental",
-   140
+   172
   ],
   [
-   "regional radio",
-   120
+   "valle de méxico",
+   170
+  ],
+  [
+   "cdmx",
+   169
+  ],
+  [
+   "mexico city",
+   164
   ],
   [
    "new wave",
-   117
+   149
   ],
   [
-   "música del recuerdo",
-   116
+   "regional radio",
+   137
   ],
   [
    "clásicos",
-   112
+   127
   ],
   [
    "online only",
-   110
+   120
   ],
   [
    "música en inglés",
-   108
+   112
+  ],
+  [
+   "regional mexican",
+   112
+  ],
+  [
+   "iheart",
+   110
+  ],
+  [
+   "iheart radio",
+   110
+  ],
+  [
+   "música del recuerdo",
+   110
+  ],
+  [
+   "grupo acir",
+   109
+  ],
+  [
+   "regional mexicana",
+   109
   ],
   [
    "local music",
-   107
+   108
   ],
   [
    "juvenil",
    103
   ],
   [
-   "regional mexican",
-   101
-  ],
-  [
-   "regional mexicana",
-   99
-  ],
-  [
-   "chillout+lounge",
-   93
+   "acir",
+   102
   ],
   [
    "música regional",
-   91
-  ],
-  [
-   "mexican music",
-   91
-  ],
-  [
-   "iheart",
-   89
-  ],
-  [
-   "dj mixes",
-   89
-  ],
-  [
-   "iheart radio",
-   89
-  ],
-  [
-   "grupo acir",
-   88
+   102
   ],
   [
    "europe",
-   87
+   100
+  ],
+  [
+   "mexican music",
+   97
+  ],
+  [
+   "chillout+lounge",
+   96
+  ],
+  [
+   "música en español e inglés",
+   94
+  ],
+  [
+   "livestream",
+   93
   ],
   [
    "regional music",
-   83
+   91
   ],
   [
-   "música mexicana",
-   83
+   "música variada",
+   90
   ],
   [
-   "radio hablada",
-   82
-  ],
-  [
-   "acir",
-   82
+   "dj mixes",
+   88
   ],
   [
    "mix",
-   81
+   84
   ],
   [
-   "greek",
+   "música mexicana",
+   80
+  ],
+  [
+   "hardcore",
    79
   ],
   [
@@ -177,32 +185,24 @@
    79
   ],
   [
-   "música variada",
-   77
+   "acir online",
+   78
   ],
   [
-   "urbano",
-   73
-  ],
-  [
-   "livestream",
-   72
+   "traditional mexican music",
+   75
   ],
   [
    "relaxing",
    72
   ],
   [
-   "hardcore",
+   "programas en vivo",
    71
   ],
   [
-   "remixes",
-   71
-  ],
-  [
-   "traditional mexican music",
-   71
+   "grupera",
+   70
   ]
  ]
 }
