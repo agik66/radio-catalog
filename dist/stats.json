@@ -1,167 +1,151 @@
 {
- "input": 16542,
- "kept": 9880,
- "dropped_unsafe": 0,
+ "input": 16586,
+ "kept": 9996,
+ "dropped_unsafe": 1,
  "dropped_dead": 0,
- "dropped_codec": 466,
- "dropped_bitrate": 2262,
- "dropped_duplicate": 3934,
- "with_genre": 6685,
- "with_geo": 2674,
+ "dropped_codec": 455,
+ "dropped_bitrate": 2289,
+ "dropped_duplicate": 3845,
+ "with_genre": 6730,
+ "with_geo": 2691,
  "geo_dropped_wrong_country": 35,
  "geo_unverifiable_country": 1,
- "geo_drop_rate_pct": 1.29,
+ "geo_drop_rate_pct": 1.28,
  "geo_margin_deg": 2.0,
- "taxonomy_coverage_pct": 61.5,
+ "taxonomy_coverage_pct": 61.2,
  "by_genre": {
-  "electronic": 1091,
-  "oldies": 895,
-  "relax": 294,
-  "jazz": 493,
-  "classical": 473,
-  "talk": 413,
-  "religious": 242,
-  "news": 853,
-  "sport": 104,
-  "blues": 207,
-  "dance": 735,
-  "pop": 1768,
-  "rock": 1080,
-  "classic-rock": 234,
-  "hiphop": 426,
-  "soul-funk": 535,
-  "country": 130,
-  "culture": 104,
-  "folk": 394,
-  "metal": 288,
-  "hard-rock": 129,
-  "latin": 251,
-  "comedy": 38,
-  "reggae": 190,
-  "alternative": 476,
-  "punk": 226,
-  "schlager": 34,
-  "kids": 43
+  "electronic": 1098,
+  "oldies": 857,
+  "relax": 295,
+  "jazz": 488,
+  "classical": 463,
+  "talk": 421,
+  "religious": 253,
+  "news": 911,
+  "sport": 103,
+  "blues": 213,
+  "dance": 696,
+  "pop": 1737,
+  "rock": 1059,
+  "classic-rock": 237,
+  "hiphop": 409,
+  "soul-funk": 527,
+  "country": 138,
+  "culture": 105,
+  "folk": 401,
+  "metal": 305,
+  "hard-rock": 132,
+  "latin": 244,
+  "comedy": 41,
+  "reggae": 188,
+  "alternative": 482,
+  "punk": 229,
+  "schlager": 38,
+  "kids": 36
  },
  "top_unmapped_tags": [
   [
    "moi merino",
-   486
+   477
   ],
   [
    "américa",
-   355
+   304
   ],
   [
    "música en español",
-   235
+   215
   ],
   [
    "ciudad de méxico",
-   186
-  ],
-  [
-   "experimental",
    172
   ],
   [
-   "valle de méxico",
-   170
-  ],
-  [
-   "cdmx",
+   "experimental",
    169
   ],
   [
    "mexico city",
-   164
+   163
+  ],
+  [
+   "valle de méxico",
+   160
+  ],
+  [
+   "cdmx",
+   154
   ],
   [
    "new wave",
-   149
+   132
   ],
   [
    "regional radio",
-   137
-  ],
-  [
-   "clásicos",
-   127
+   131
   ],
   [
    "online only",
-   120
+   113
   ],
   [
    "música en inglés",
    112
   ],
   [
-   "regional mexican",
-   112
-  ],
-  [
-   "iheart",
-   110
+   "local music",
+   111
   ],
   [
    "iheart radio",
-   110
+   106
   ],
   [
-   "música del recuerdo",
-   110
+   "iheart",
+   105
   ],
   [
    "grupo acir",
-   109
+   104
   ],
   [
-   "regional mexicana",
-   109
-  ],
-  [
-   "local music",
-   108
-  ],
-  [
-   "juvenil",
+   "clásicos",
    103
   ],
   [
    "acir",
-   102
+   98
   ],
   [
-   "música regional",
-   102
-  ],
-  [
-   "europe",
-   100
-  ],
-  [
-   "mexican music",
+   "música del recuerdo",
    97
   ],
   [
-   "chillout+lounge",
+   "europe",
    96
   ],
   [
-   "música en español e inglés",
+   "juvenil",
+   96
+  ],
+  [
+   "regional mexicana",
    94
   ],
   [
-   "livestream",
-   93
-  ],
-  [
-   "regional music",
+   "chillout+lounge",
    91
   ],
   [
-   "música variada",
+   "música regional",
+   91
+  ],
+  [
+   "mix",
+   90
+  ],
+  [
+   "regional mexican",
    90
   ],
   [
@@ -169,40 +153,56 @@
    88
   ],
   [
-   "mix",
-   84
+   "mexican music",
+   86
   ],
   [
-   "música mexicana",
+   "livestream",
+   85
+  ],
+  [
+   "música variada",
+   82
+  ],
+  [
+   "romantic",
    80
   ],
   [
-   "hardcore",
-   79
-  ],
-  [
-   "música regional mexicana",
-   79
-  ],
-  [
    "acir online",
-   78
-  ],
-  [
-   "traditional mexican music",
-   75
+   79
   ],
   [
    "relaxing",
+   78
+  ],
+  [
+   "regional music",
+   76
+  ],
+  [
+   "urbano",
+   74
+  ],
+  [
+   "música en español e inglés",
    72
   ],
   [
-   "programas en vivo",
-   71
+   "hardcore",
+   72
   ],
   [
-   "grupera",
+   "remixes",
    70
+  ],
+  [
+   "radio hablada",
+   70
+  ],
+  [
+   "música mexicana",
+   66
   ]
  ]
 }
