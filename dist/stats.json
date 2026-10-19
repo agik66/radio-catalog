@@ -1,208 +1,208 @@
 {
- "input": 16586,
- "kept": 9996,
- "dropped_unsafe": 1,
+ "input": 16720,
+ "kept": 10090,
+ "dropped_unsafe": 0,
  "dropped_dead": 0,
- "dropped_codec": 455,
- "dropped_bitrate": 2289,
- "dropped_duplicate": 3845,
- "with_genre": 6730,
- "with_geo": 2691,
- "geo_dropped_wrong_country": 35,
+ "dropped_codec": 493,
+ "dropped_bitrate": 2224,
+ "dropped_duplicate": 3913,
+ "with_genre": 6928,
+ "with_geo": 2646,
+ "geo_dropped_wrong_country": 33,
  "geo_unverifiable_country": 1,
- "geo_drop_rate_pct": 1.28,
+ "geo_drop_rate_pct": 1.23,
  "geo_margin_deg": 2.0,
- "taxonomy_coverage_pct": 61.2,
+ "taxonomy_coverage_pct": 62.0,
  "by_genre": {
-  "electronic": 1098,
-  "oldies": 857,
-  "relax": 295,
-  "jazz": 488,
-  "classical": 463,
-  "talk": 421,
-  "religious": 253,
-  "news": 911,
-  "sport": 103,
-  "blues": 213,
-  "dance": 696,
-  "pop": 1737,
-  "rock": 1059,
-  "classic-rock": 237,
-  "hiphop": 409,
-  "soul-funk": 527,
-  "country": 138,
-  "culture": 105,
-  "folk": 401,
-  "metal": 305,
-  "hard-rock": 132,
-  "latin": 244,
-  "comedy": 41,
-  "reggae": 188,
-  "alternative": 482,
-  "punk": 229,
-  "schlager": 38,
-  "kids": 36
+  "electronic": 1115,
+  "oldies": 863,
+  "relax": 296,
+  "jazz": 497,
+  "classical": 483,
+  "talk": 562,
+  "religious": 267,
+  "news": 1073,
+  "sport": 129,
+  "blues": 207,
+  "dance": 704,
+  "pop": 1797,
+  "rock": 1068,
+  "classic-rock": 245,
+  "hiphop": 430,
+  "soul-funk": 526,
+  "country": 123,
+  "culture": 119,
+  "folk": 431,
+  "metal": 310,
+  "hard-rock": 135,
+  "latin": 241,
+  "comedy": 33,
+  "reggae": 202,
+  "alternative": 470,
+  "punk": 235,
+  "schlager": 28,
+  "kids": 43
  },
  "top_unmapped_tags": [
   [
    "moi merino",
-   477
+   494
   ],
   [
    "américa",
-   304
+   357
   ],
   [
    "música en español",
-   215
+   228
   ],
   [
    "ciudad de méxico",
-   172
+   182
   ],
   [
    "experimental",
-   169
+   173
   ],
   [
    "mexico city",
-   163
+   170
   ],
   [
    "valle de méxico",
-   160
+   169
   ],
   [
    "cdmx",
-   154
+   168
   ],
   [
    "new wave",
-   132
+   136
   ],
   [
    "regional radio",
-   131
-  ],
-  [
-   "online only",
-   113
-  ],
-  [
-   "música en inglés",
-   112
-  ],
-  [
-   "local music",
-   111
-  ],
-  [
-   "iheart radio",
-   106
-  ],
-  [
-   "iheart",
-   105
-  ],
-  [
-   "grupo acir",
-   104
+   124
   ],
   [
    "clásicos",
+   115
+  ],
+  [
+   "regional mexicana",
+   111
+  ],
+  [
+   "online only",
+   110
+  ],
+  [
+   "regional mexican",
+   110
+  ],
+  [
+   "música regional",
+   107
+  ],
+  [
+   "local music",
    103
   ],
   [
-   "acir",
+   "música en inglés",
+   103
+  ],
+  [
+   "iheart",
+   101
+  ],
+  [
+   "iheart radio",
+   101
+  ],
+  [
+   "grupo acir",
+   100
+  ],
+  [
+   "juvenil",
+   99
+  ],
+  [
+   "mexican music",
+   98
+  ],
+  [
+   "música mexicana",
    98
   ],
   [
    "música del recuerdo",
-   97
-  ],
-  [
-   "europe",
-   96
-  ],
-  [
-   "juvenil",
-   96
-  ],
-  [
-   "regional mexicana",
-   94
+   98
   ],
   [
    "chillout+lounge",
-   91
+   94
   ],
   [
-   "música regional",
-   91
+   "acir",
+   94
   ],
   [
-   "mix",
-   90
+   "música regional mexicana",
+   93
   ],
   [
-   "regional mexican",
-   90
-  ],
-  [
-   "dj mixes",
-   88
-  ],
-  [
-   "mexican music",
-   86
+   "europe",
+   89
   ],
   [
    "livestream",
-   85
+   88
   ],
   [
-   "música variada",
-   82
+   "dj mixes",
+   87
   ],
   [
-   "romantic",
-   80
-  ],
-  [
-   "acir online",
-   79
-  ],
-  [
-   "relaxing",
-   78
+   "mix",
+   87
   ],
   [
    "regional music",
-   76
+   86
   ],
   [
-   "urbano",
+   "música variada",
+   83
+  ],
+  [
+   "relaxing",
    74
   ],
   [
-   "música en español e inglés",
-   72
+   "romantic",
+   73
   ],
   [
    "hardcore",
-   72
+   71
   ],
   [
-   "remixes",
+   "grupera",
+   71
+  ],
+  [
+   "traditional mexican music",
+   71
+  ],
+  [
+   "smooth",
    70
   ],
   [
-   "radio hablada",
+   "acir online",
    70
-  ],
-  [
-   "música mexicana",
-   66
   ]
  ]
 }
