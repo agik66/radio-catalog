@@ -1,167 +1,147 @@
 {
- "input": 16720,
- "kept": 10090,
+ "input": 16757,
+ "kept": 10096,
  "dropped_unsafe": 0,
  "dropped_dead": 0,
- "dropped_codec": 493,
- "dropped_bitrate": 2224,
- "dropped_duplicate": 3913,
- "with_genre": 6928,
- "with_geo": 2646,
- "geo_dropped_wrong_country": 33,
+ "dropped_codec": 490,
+ "dropped_bitrate": 2230,
+ "dropped_duplicate": 3941,
+ "with_genre": 6837,
+ "with_geo": 2659,
+ "geo_dropped_wrong_country": 37,
  "geo_unverifiable_country": 1,
- "geo_drop_rate_pct": 1.23,
+ "geo_drop_rate_pct": 1.37,
  "geo_margin_deg": 2.0,
- "taxonomy_coverage_pct": 62.0,
+ "taxonomy_coverage_pct": 62.2,
  "by_genre": {
-  "electronic": 1115,
-  "oldies": 863,
-  "relax": 296,
-  "jazz": 497,
-  "classical": 483,
-  "talk": 562,
-  "religious": 267,
-  "news": 1073,
-  "sport": 129,
-  "blues": 207,
-  "dance": 704,
-  "pop": 1797,
-  "rock": 1068,
-  "classic-rock": 245,
-  "hiphop": 430,
-  "soul-funk": 526,
-  "country": 123,
-  "culture": 119,
-  "folk": 431,
-  "metal": 310,
-  "hard-rock": 135,
-  "latin": 241,
-  "comedy": 33,
-  "reggae": 202,
-  "alternative": 470,
-  "punk": 235,
-  "schlager": 28,
-  "kids": 43
+  "electronic": 1108,
+  "oldies": 886,
+  "relax": 285,
+  "jazz": 490,
+  "classical": 480,
+  "talk": 525,
+  "religious": 275,
+  "news": 990,
+  "sport": 140,
+  "blues": 204,
+  "dance": 711,
+  "pop": 1766,
+  "rock": 1034,
+  "classic-rock": 226,
+  "hiphop": 426,
+  "soul-funk": 527,
+  "country": 140,
+  "culture": 122,
+  "folk": 406,
+  "metal": 297,
+  "hard-rock": 124,
+  "latin": 267,
+  "comedy": 35,
+  "reggae": 205,
+  "alternative": 468,
+  "punk": 229,
+  "schlager": 32,
+  "kids": 36
  },
  "top_unmapped_tags": [
   [
    "moi merino",
-   494
+   423
   ],
   [
    "américa",
-   357
+   284
   ],
   [
    "música en español",
-   228
-  ],
-  [
-   "ciudad de méxico",
-   182
+   212
   ],
   [
    "experimental",
-   173
+   190
+  ],
+  [
+   "ciudad de méxico",
+   175
   ],
   [
    "mexico city",
-   170
-  ],
-  [
-   "valle de méxico",
-   169
+   165
   ],
   [
    "cdmx",
-   168
+   163
+  ],
+  [
+   "valle de méxico",
+   158
   ],
   [
    "new wave",
-   136
+   156
   ],
   [
    "regional radio",
-   124
+   128
   ],
   [
    "clásicos",
-   115
-  ],
-  [
-   "regional mexicana",
-   111
-  ],
-  [
-   "online only",
-   110
-  ],
-  [
-   "regional mexican",
-   110
-  ],
-  [
-   "música regional",
-   107
+   108
   ],
   [
    "local music",
-   103
-  ],
-  [
-   "música en inglés",
-   103
-  ],
-  [
-   "iheart",
-   101
-  ],
-  [
-   "iheart radio",
-   101
-  ],
-  [
-   "grupo acir",
-   100
-  ],
-  [
-   "juvenil",
-   99
-  ],
-  [
-   "mexican music",
-   98
-  ],
-  [
-   "música mexicana",
-   98
-  ],
-  [
-   "música del recuerdo",
-   98
-  ],
-  [
-   "chillout+lounge",
-   94
-  ],
-  [
-   "acir",
-   94
-  ],
-  [
-   "música regional mexicana",
-   93
+   107
   ],
   [
    "europe",
-   89
+   106
+  ],
+  [
+   "online only",
+   104
+  ],
+  [
+   "regional mexicana",
+   101
+  ],
+  [
+   "regional mexican",
+   100
   ],
   [
    "livestream",
-   88
+   96
+  ],
+  [
+   "música en inglés",
+   95
+  ],
+  [
+   "música regional",
+   95
+  ],
+  [
+   "música del recuerdo",
+   93
+  ],
+  [
+   "chillout+lounge",
+   91
   ],
   [
    "dj mixes",
+   90
+  ],
+  [
+   "juvenil",
+   89
+  ],
+  [
+   "mexican music",
+   88
+  ],
+  [
+   "iheart radio",
    87
   ],
   [
@@ -169,40 +149,60 @@
    87
   ],
   [
-   "regional music",
+   "iheart",
    86
   ],
   [
-   "música variada",
-   83
+   "grupo acir",
+   85
   ],
   [
-   "relaxing",
-   74
+   "acir",
+   81
   ],
   [
-   "romantic",
-   73
+   "regional music",
+   79
   ],
   [
    "hardcore",
-   71
+   75
   ],
   [
    "grupera",
+   74
+  ],
+  [
+   "relaxing",
+   73
+  ],
+  [
+   "gothic",
+   73
+  ],
+  [
+   "drgnu",
+   73
+  ],
+  [
+   "música variada",
    71
   ],
   [
-   "traditional mexican music",
-   71
-  ],
-  [
-   "smooth",
+   "urbano",
    70
   ],
   [
-   "acir online",
-   70
+   "romantic",
+   69
+  ],
+  [
+   "classics",
+   67
+  ],
+  [
+   "mex",
+   66
   ]
  ]
 }
