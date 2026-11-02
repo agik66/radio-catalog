@@ -1,164 +1,172 @@
 {
- "input": 16757,
- "kept": 10096,
+ "input": 16546,
+ "kept": 10166,
  "dropped_unsafe": 0,
  "dropped_dead": 0,
- "dropped_codec": 490,
- "dropped_bitrate": 2230,
- "dropped_duplicate": 3941,
- "with_genre": 6837,
- "with_geo": 2659,
- "geo_dropped_wrong_country": 37,
+ "dropped_codec": 447,
+ "dropped_bitrate": 2154,
+ "dropped_duplicate": 3779,
+ "with_genre": 6939,
+ "with_geo": 2681,
+ "geo_dropped_wrong_country": 39,
  "geo_unverifiable_country": 1,
- "geo_drop_rate_pct": 1.37,
+ "geo_drop_rate_pct": 1.43,
  "geo_margin_deg": 2.0,
  "taxonomy_coverage_pct": 62.2,
  "by_genre": {
-  "electronic": 1108,
-  "oldies": 886,
-  "relax": 285,
-  "jazz": 490,
-  "classical": 480,
-  "talk": 525,
-  "religious": 275,
-  "news": 990,
-  "sport": 140,
-  "blues": 204,
-  "dance": 711,
-  "pop": 1766,
-  "rock": 1034,
-  "classic-rock": 226,
-  "hiphop": 426,
-  "soul-funk": 527,
-  "country": 140,
-  "culture": 122,
-  "folk": 406,
-  "metal": 297,
-  "hard-rock": 124,
-  "latin": 267,
-  "comedy": 35,
-  "reggae": 205,
-  "alternative": 468,
-  "punk": 229,
-  "schlager": 32,
+  "electronic": 1118,
+  "oldies": 879,
+  "relax": 307,
+  "jazz": 523,
+  "classical": 499,
+  "talk": 537,
+  "religious": 281,
+  "news": 1038,
+  "sport": 133,
+  "blues": 211,
+  "dance": 725,
+  "pop": 1788,
+  "rock": 1047,
+  "classic-rock": 234,
+  "hiphop": 433,
+  "soul-funk": 536,
+  "country": 132,
+  "culture": 125,
+  "folk": 402,
+  "metal": 300,
+  "hard-rock": 123,
+  "latin": 247,
+  "comedy": 36,
+  "reggae": 206,
+  "alternative": 464,
+  "punk": 232,
+  "schlager": 35,
   "kids": 36
  },
  "top_unmapped_tags": [
   [
    "moi merino",
-   423
+   441
   ],
   [
    "américa",
-   284
+   306
   ],
   [
    "música en español",
-   212
-  ],
-  [
-   "experimental",
-   190
+   216
   ],
   [
    "ciudad de méxico",
-   175
+   194
   ],
   [
    "mexico city",
-   165
-  ],
-  [
-   "cdmx",
-   163
+   184
   ],
   [
    "valle de méxico",
-   158
+   182
   ],
   [
-   "new wave",
-   156
+   "cdmx",
+   181
   ],
   [
-   "regional radio",
-   128
-  ],
-  [
-   "clásicos",
-   108
-  ],
-  [
-   "local music",
-   107
-  ],
-  [
-   "europe",
-   106
+   "experimental",
+   168
   ],
   [
    "online only",
-   104
+   127
   ],
   [
-   "regional mexicana",
-   101
+   "new wave",
+   124
   ],
   [
-   "regional mexican",
-   100
-  ],
-  [
-   "livestream",
-   96
-  ],
-  [
-   "música en inglés",
-   95
-  ],
-  [
-   "música regional",
-   95
-  ],
-  [
-   "música del recuerdo",
-   93
-  ],
-  [
-   "chillout+lounge",
-   91
-  ],
-  [
-   "dj mixes",
-   90
-  ],
-  [
-   "juvenil",
-   89
-  ],
-  [
-   "mexican music",
-   88
-  ],
-  [
-   "iheart radio",
-   87
-  ],
-  [
-   "mix",
-   87
+   "regional radio",
+   119
   ],
   [
    "iheart",
-   86
+   117
+  ],
+  [
+   "iheart radio",
+   117
   ],
   [
    "grupo acir",
-   85
+   116
   ],
   [
    "acir",
-   81
+   108
+  ],
+  [
+   "juvenil",
+   106
+  ],
+  [
+   "local music",
+   104
+  ],
+  [
+   "música del recuerdo",
+   104
+  ],
+  [
+   "clásicos",
+   103
+  ],
+  [
+   "europe",
+   98
+  ],
+  [
+   "regional mexican",
+   97
+  ],
+  [
+   "regional mexicana",
+   95
+  ],
+  [
+   "chillout+lounge",
+   94
+  ],
+  [
+   "música en inglés",
+   93
+  ],
+  [
+   "mexican music",
+   90
+  ],
+  [
+   "acir online",
+   89
+  ],
+  [
+   "mix",
+   88
+  ],
+  [
+   "música regional",
+   87
+  ],
+  [
+   "romantic",
+   86
+  ],
+  [
+   "livestream",
+   82
+  ],
+  [
+   "dj mixes",
+   82
   ],
   [
    "regional music",
@@ -166,10 +174,10 @@
   ],
   [
    "hardcore",
-   75
+   77
   ],
   [
-   "grupera",
+   "música mexicana",
    74
   ],
   [
@@ -177,32 +185,24 @@
    73
   ],
   [
-   "gothic",
-   73
+   "piano",
+   72
   ],
   [
-   "drgnu",
-   73
+   "música regional mexicana",
+   72
+  ],
+  [
+   "traditional mexican music",
+   68
   ],
   [
    "música variada",
-   71
-  ],
-  [
-   "urbano",
-   70
-  ],
-  [
-   "romantic",
-   69
-  ],
-  [
-   "classics",
    67
   ],
   [
-   "mex",
-   66
+   "classics",
+   65
   ]
  ]
 }
